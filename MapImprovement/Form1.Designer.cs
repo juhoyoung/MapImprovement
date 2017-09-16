@@ -41,10 +41,12 @@
             this.기본선ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.굵은선ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.방만들기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CreateServer_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CloseServer_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.방참가ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.참가하기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.종료ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.연결끊기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ConnectServer_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DisConnectServer_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Exit_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenu1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,7 +57,7 @@
             this.펜굵기ToolStripMenuItem,
             this.방만들기ToolStripMenuItem,
             this.방참가ToolStripMenuItem,
-            this.종료ToolStripMenuItem});
+            this.Exit_MenuItem});
             this.contextMenu1.Name = "contextMenu1";
             this.contextMenu1.Size = new System.Drawing.Size(153, 136);
             this.contextMenu1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenu1_ItemClicked);
@@ -134,41 +136,57 @@
             // 
             // 방만들기ToolStripMenuItem
             // 
+            this.방만들기ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CreateServer_MenuItem,
+            this.CloseServer_MenuItem});
             this.방만들기ToolStripMenuItem.Name = "방만들기ToolStripMenuItem";
             this.방만들기ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.방만들기ToolStripMenuItem.Text = "방 만들기";
-            this.방만들기ToolStripMenuItem.Click += new System.EventHandler(this.방만들기ToolStripMenuItem_Click);
+            // 
+            // CreateServer_MenuItem
+            // 
+            this.CreateServer_MenuItem.Name = "CreateServer_MenuItem";
+            this.CreateServer_MenuItem.Size = new System.Drawing.Size(152, 22);
+            this.CreateServer_MenuItem.Text = "방 만들기";
+            this.CreateServer_MenuItem.Click += new System.EventHandler(this.CreateServer_MenuItem_Click);
+            // 
+            // CloseServer_MenuItem
+            // 
+            this.CloseServer_MenuItem.Name = "CloseServer_MenuItem";
+            this.CloseServer_MenuItem.Size = new System.Drawing.Size(152, 22);
+            this.CloseServer_MenuItem.Text = "방 닫기";
+            this.CloseServer_MenuItem.Click += new System.EventHandler(this.CloseServer_MenuItem_Click);
             // 
             // 방참가ToolStripMenuItem
             // 
             this.방참가ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.참가하기ToolStripMenuItem,
-            this.연결끊기ToolStripMenuItem});
+            this.ConnectServer_MenuItem,
+            this.DisConnectServer_MenuItem});
             this.방참가ToolStripMenuItem.Name = "방참가ToolStripMenuItem";
             this.방참가ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.방참가ToolStripMenuItem.Text = "방 참가";
             // 
-            // 참가하기ToolStripMenuItem
+            // ConnectServer_MenuItem
             // 
-            this.참가하기ToolStripMenuItem.Name = "참가하기ToolStripMenuItem";
-            this.참가하기ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.참가하기ToolStripMenuItem.Text = "참가 하기";
-            this.참가하기ToolStripMenuItem.Click += new System.EventHandler(this.참가하기ToolStripMenuItem_Click);
+            this.ConnectServer_MenuItem.Name = "ConnectServer_MenuItem";
+            this.ConnectServer_MenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ConnectServer_MenuItem.Text = "참가 하기";
+            this.ConnectServer_MenuItem.Click += new System.EventHandler(this.ConnectServer_MenuItem_Click);
             // 
-            // 종료ToolStripMenuItem
+            // DisConnectServer_MenuItem
             // 
-            this.종료ToolStripMenuItem.Name = "종료ToolStripMenuItem";
-            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.종료ToolStripMenuItem.Text = "종료";
-            this.종료ToolStripMenuItem.Click += new System.EventHandler(this.종료ToolStripMenuItem_Click);
+            this.DisConnectServer_MenuItem.Enabled = false;
+            this.DisConnectServer_MenuItem.Name = "DisConnectServer_MenuItem";
+            this.DisConnectServer_MenuItem.Size = new System.Drawing.Size(152, 22);
+            this.DisConnectServer_MenuItem.Text = "연결 끊기";
+            this.DisConnectServer_MenuItem.Click += new System.EventHandler(this.DisConnectServer_MenuItem_Click);
             // 
-            // 연결끊기ToolStripMenuItem
+            // Exit_MenuItem
             // 
-            this.연결끊기ToolStripMenuItem.Enabled = false;
-            this.연결끊기ToolStripMenuItem.Name = "연결끊기ToolStripMenuItem";
-            this.연결끊기ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.연결끊기ToolStripMenuItem.Text = "연결 끊기";
-            this.연결끊기ToolStripMenuItem.Click += new System.EventHandler(this.연결끊기ToolStripMenuItem_Click);
+            this.Exit_MenuItem.Name = "Exit_MenuItem";
+            this.Exit_MenuItem.Size = new System.Drawing.Size(152, 22);
+            this.Exit_MenuItem.Text = "종료";
+            this.Exit_MenuItem.Click += new System.EventHandler(this.ExitMenuItem_Click);
             // 
             // CanvasForm
             // 
@@ -203,11 +221,13 @@
         private System.Windows.Forms.ToolStripMenuItem 얇은선ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 기본선ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 굵은선ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 종료ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem Exit_MenuItem;
         private System.Windows.Forms.ToolStripMenuItem 방참가ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 방만들기ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 참가하기ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 연결끊기ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ConnectServer_MenuItem;
+        private System.Windows.Forms.ToolStripMenuItem DisConnectServer_MenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CreateServer_MenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CloseServer_MenuItem;
     }
 }
 

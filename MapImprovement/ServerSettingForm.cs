@@ -10,19 +10,16 @@ using System.Windows.Forms;
 
 namespace MapImprovement
 {
-    public partial class ClientSettingForm : Form
+    public partial class ServerSettingForm : Form
     {
-        public ClientSettingForm()
+        public ServerSettingForm()
         {
             InitializeComponent();
         }
 
-        private void Connect_Btn_Click(object sender, EventArgs e) // 아이피 주소와 포트번호 넘겨줌
+        private void Connect_Btn_Click(object sender, EventArgs e)
         {
-            OptionController.instance.setConnectIP(IP_textBox.Text);
-            OptionController.instance.setConnectPort(int.Parse(Port_textBox.Text));
-
-
+            OptionController.instance.setServerPort(int.Parse(Port_textBox.Text));
             this.Close();
         }
     }

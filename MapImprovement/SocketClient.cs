@@ -45,8 +45,8 @@ namespace MapImprovement
             String IPAddress;
             int Port;
 
-            IPAddress = OptionController.oController.getConnectIP();
-            Port = OptionController.oController.getConnectPort();
+            IPAddress = OptionController.instance.getConnectIP();
+            Port = OptionController.instance.getConnectPort();
             try
             {
                 //clientSocket.Connect("110.14.208.196", 10000);
@@ -99,7 +99,6 @@ namespace MapImprovement
             {
                 try
                 {
-                    
                     stream = clientSocket.GetStream();
                     int BUFFERSIZE = clientSocket.ReceiveBufferSize;
                     byte[] buffer = new byte[BUFFERSIZE];
@@ -111,6 +110,12 @@ namespace MapImprovement
                 catch(IOException e)
                 {
                     Console.WriteLine("GetMessage Exception : " + e);
+                }
+                catch(InvalidOperationException e)
+                {
+                    Console.WriteLine("GetMessage Exception : " + e);
+                    SetConnectState();
+                    DisConnectServer();
                 }
                 catch(ThreadAbortException)
                 {

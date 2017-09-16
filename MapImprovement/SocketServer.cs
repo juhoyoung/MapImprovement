@@ -13,6 +13,8 @@ namespace MapImprovement
 {
     class SocketServer
     {
+        Thread t_socket;
+
         bool ServerState = false;
         CanvasForm cForm;
         TcpListener server = null;
@@ -25,9 +27,9 @@ namespace MapImprovement
         {
             this.cForm = cForm;
             // socket start
-            Thread t = new Thread(InitSocket);
-            t.IsBackground = true;
-            t.Start();
+            t_socket = new Thread(InitSocket);
+            t_socket.IsBackground = true;
+            t_socket.Start();
         }
 
         public void SetServerState() // 서버 상태 바뀔때 호출
@@ -51,8 +53,10 @@ namespace MapImprovement
 
         private void InitSocket()
         {
+            int Port;
+            Port = OptionController.instance.getServerPort();
             //server = new TcpListener(IPAddress.Parse("192.168.35.168"), 10000);
-            server = new TcpListener(IPAddress.Any, 10000);
+            server = new TcpListener(IPAddress.Any, Port);
 
             try
             {
@@ -70,9 +74,9 @@ namespace MapImprovement
                     try
                     {
                         counter++;
+                        Console.WriteLine(counter);
                         clientSocket = server.AcceptTcpClient();
                         DisplayText(">> Accept connection from client");
-
                         NetworkStream stream = clientSocket.GetStream();
                         byte[] buffer = new byte[1024];
                         int bytes = stream.Read(buffer, 0, buffer.Length);
@@ -93,15 +97,21 @@ namespace MapImprovement
                     {
                         Trace.WriteLine(string.Format("InitSocket - SocketException : {0}", se.Message));
                         break;
+
+                    }
+                    catch (ThreadAbortException)
+                    {
+                        Console.WriteLine("InitSocket ThreadAbortException");
                     }
                     catch (Exception ex)
                     {
                         Trace.WriteLine(string.Format("InitSocket - Exception : {0}", ex.Message));
                         break;
                     }
+
                 }
 
-                clientSocket.Close();
+                //clientSocket.Close();
                 server.Stop();
             }
             catch(SocketException e)
@@ -115,13 +125,21 @@ namespace MapImprovement
         {
             try
             {
-                clientSocket.Close();
                 server.Stop();
-                SetServerState();
+                clientSocket.Close();
             }
             catch(SocketException e)
             {
-                Console.WriteLine("CloseServer Exception" + e);
+                Console.WriteLine("CloseServer SocketException" + e);
+            }
+            catch(NullReferenceException e)
+            {
+                Console.WriteLine("CloseServer NullReferenceException " + e);
+            }
+            finally
+            {
+                t_socket.Abort();
+                SetServerState();
             }
         }
 

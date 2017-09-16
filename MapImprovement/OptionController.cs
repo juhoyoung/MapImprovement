@@ -9,7 +9,7 @@ namespace MapImprovement
 {
     class OptionController
     {
-        public static OptionController oController = new OptionController();
+        public static OptionController instance = new OptionController();
 
         private int ServerPort = 10000; // 서버 포트
         private int ConnectPort = 10000; // 클라이언트에서 연결할 포트

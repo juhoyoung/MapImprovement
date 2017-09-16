@@ -9,3 +9,4 @@ F:\hoyoung\Project\MapImprovement\MapImprovement\obj\Debug\MapImprovement.pdb
 F:\hoyoung\Project\MapImprovement\MapImprovement\obj\Debug\MapImprovement.CanvasForm.resources
 F:\hoyoung\Project\MapImprovement\MapImprovement\obj\Debug\MapImprovement.ViewForm.resources
 F:\hoyoung\Project\MapImprovement\MapImprovement\obj\Debug\MapImprovement.ClientSettingForm.resources
+F:\hoyoung\Project\MapImprovement\MapImprovement\obj\Debug\MapImprovement.ServerSettingForm.resources
