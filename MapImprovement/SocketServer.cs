@@ -73,12 +73,11 @@ namespace MapImprovement
                 {
                     try
                     {
-                        counter++;
-                        Console.WriteLine(counter);
+                        counter++; // 접속한 애들 수
                         clientSocket = server.AcceptTcpClient();
                         DisplayText(">> Accept connection from client");
                         NetworkStream stream = clientSocket.GetStream();
-                        byte[] buffer = new byte[1024];
+                        byte[] buffer = new byte[20000];
                         int bytes = stream.Read(buffer, 0, buffer.Length);
                         string user_name = Encoding.Unicode.GetString(buffer, 0, bytes);
                         user_name = user_name.Substring(0, user_name.IndexOf("$"));
@@ -146,7 +145,11 @@ namespace MapImprovement
         void h_client_OnDisconnected(TcpClient clientSocket)
         {
             if (clientList.ContainsKey(clientSocket))
+            {
+                
+                Console.WriteLine("나갔음 이새끼 " + clientList[clientSocket]);
                 clientList.Remove(clientSocket);
+            }
         }
 
         private void OnReceived(string message, string user_name)

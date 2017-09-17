@@ -62,7 +62,7 @@ namespace MapImprovement
             startX = e.X;
             startY = e.Y;
 
-            if (countInfoset >= 15)
+            if (countInfoset >= 30)
             {
                 // 서버 전송
                 cForm.SendPenInfo(DrawInfoSet);

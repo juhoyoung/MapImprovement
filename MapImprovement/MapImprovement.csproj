@@ -62,6 +62,12 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="handleClient.cs" />
+    <Compile Include="HotKeyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HotKeyForm.Designer.cs">
+      <DependentUpon>HotKeyForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="KeyProcessing.cs" />
     <Compile Include="OptionController.cs" />
     <Compile Include="Program.cs" />
@@ -85,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HotKeyForm.resx">
+      <DependentUpon>HotKeyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

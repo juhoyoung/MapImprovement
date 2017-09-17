@@ -35,7 +35,7 @@ namespace MapImprovement
             NetworkStream stream = null;
             try
             {
-                byte[] buffer = new byte[1024];
+                byte[] buffer = new byte[20000];
                 string msg = string.Empty;
                 int bytes = 0;
                 int MessageCount = 0;

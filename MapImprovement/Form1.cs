@@ -23,6 +23,7 @@ namespace MapImprovement
 
 
         DrawingManager dManager; // 그리기 총괄
+        HotKeyForm hKeyForm;
 
         SocketServer sServer;
         SocketClient sClient;
@@ -30,6 +31,7 @@ namespace MapImprovement
         public CanvasForm()
         {   
             InitializeComponent();
+            hKeyForm = new HotKeyForm();
             cSetForm = new ClientSettingForm();
             sSetForm = new ServerSettingForm();
             //this.Size = new Size(System.Windows.Forms.SystemInformation.VirtualScreen.Width, System.Windows.Forms.SystemInformation.VirtualScreen.Height);
@@ -51,15 +53,22 @@ namespace MapImprovement
             Console.WriteLine("canvas setvisibleForm 호출");
             if (isVisible == true)
             {
-                this.Hide();
+                //this.Hide();
+                this.Opacity = 0;
+                this.ShowInTaskbar = false;
                 isVisible = false;
+                this.notifyIcon1.Visible = true;
 
             }
             else
             {
-                this.Show();
+                //this.Show();
+                this.Opacity = 0.4;
                 isVisible = true;
+                this.ShowInTaskbar = true;
+                this.notifyIcon1.Visible = false;
             }
+            
         }
 
 
@@ -201,6 +210,39 @@ namespace MapImprovement
         private void ExitMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void HidePicture_MenuItem_Click(object sender, EventArgs e) // 프로그램 숨김
+        {
+            StartDrawing_MenuItem.Enabled = false;
+            ShowPicture_MenuItem.Enabled = true;
+            KeyProcessing.HidePicture();
+            
+        }
+
+        private void ShowPicture_MenuItem_Click(object sender, EventArgs e) // 프로그램 표시
+        {
+            KeyProcessing.HidePicture();
+        }
+
+        private void StopDrawing_MenuItem_Click(object sender, EventArgs e) // 그리는판 숨김
+        {
+            StartDrawing_MenuItem.Enabled = true;
+            ShowPicture_MenuItem.Enabled = false;
+            KeyProcessing.SetDrawingStatus();
+
+        }
+
+
+
+        private void StartDrawing_MenuItem_Click(object sender, EventArgs e) // 그리는판 생성
+        {
+            KeyProcessing.SetDrawingStatus();
+        }
+
+        private void HotKeyMenuItem_Click(object sender, EventArgs e)
+        {
+            hKeyForm.ShowDialog();
         }
     }
 }

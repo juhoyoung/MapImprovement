@@ -22,8 +22,6 @@ namespace MapImprovement
 
         private void ViewForm_Load(object sender, EventArgs e)
         {
-            
-            
             KeyProcessing.kProcessing.getViewForm(this);
             this.ShowInTaskbar = false;
             //this.Size = new Size(System.Windows.Forms.SystemInformation.VirtualScreen.Width, System.Windows.Forms.SystemInformation.VirtualScreen.Height);
@@ -36,16 +34,18 @@ namespace MapImprovement
 
         public void SetVisibleForm() // 폼 visible 설정
         {
-            Console.WriteLine("viewform setvisibleForm 호출");
+            Console.WriteLine("Viewform setvisibleForm 호출");
             if (isVisible == true)
             {
-                this.Hide();
+                //this.Hide();
+                this.Opacity = 0;
                 isVisible = false;
                 
             }
             else
             {
-                this.Show();
+                //this.Show();
+                this.Opacity = 1.0;
                 isVisible = true;
             }
         }

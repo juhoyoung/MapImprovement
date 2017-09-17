@@ -57,6 +57,17 @@ namespace MapImprovement
             viewForm = vForm;
         }
 
+        public static void HidePicture() // 프로그램 숨김
+        {
+            canvasForm.SetVisibleForm();
+            viewForm.SetVisibleForm();
+        }
+
+        public static void SetDrawingStatus() // 그리는 판 숨김
+        {
+            canvasForm.SetVisibleForm();
+        }
+
         public void SetHook()
         {
             IntPtr hInstance = LoadLibrary("User32");
@@ -71,7 +82,7 @@ namespace MapImprovement
         public static IntPtr hookProc(int code, IntPtr wParam, IntPtr lParam)
         {
 
-            Console.WriteLine(code + " W=" + wParam + " I=" + Marshal.ReadInt32(lParam));
+            //Console.WriteLine(code + " W=" + wParam + " I=" + Marshal.ReadInt32(lParam));
 
             if (code >= 0 && wParam == (IntPtr)WM_KEYDOWN && KeyDown == false)
             {
@@ -102,37 +113,62 @@ namespace MapImprovement
             if (code >= 0 && wParam == (IntPtr)WM_KEYDOWN && KeyDown == true) // ctrl 키 누르고있을때
             {
                 vkCode = Marshal.ReadInt32(lParam);
+                bool isHook = false;
+                
+                
+                isHook = HotKeyClassification(vkCode);
 
-                if (vkCode.ToString() == "81")  // q 누를시 그리는 판 숨김
-                {
-                    try
-                    {
-                        canvasForm.SetVisibleForm();
-                    }
-                    catch (InvalidOperationException)
-                    {
-                    }
-                }
-
-
-                if (vkCode.ToString() == "87") // w 누를시 그려진 판 숨김
-                {
-                    canvasForm.SetVisibleForm();
-                    viewForm.SetVisibleForm();
+                if(isHook == true)
                     return hhook;
-                }
 
-
-                if (vkCode.ToString() == "32")
-                {
-                    viewForm.Refresh();
-                }
             }
 
             return CallNextHookEx(hhook, code, (int)wParam, lParam);
 
         }
 
+
+        private static bool HotKeyClassification(int vkCode) // 단축키 처리
+        {
+            char vkCodetoChar;
+            string vkCodetoString;
+
+            string HotKeyHide;  // 프로그램 숨기기,보이기
+            string HotKeyDrawing; // 그리기 모드 On Off
+            string HotKeyReset; // 화면 초기화
+
+            HotKeyHide = OptionController.instance.getHotKeyHide();
+            HotKeyDrawing = OptionController.instance.getHotKeyDrawing();
+            HotKeyReset = OptionController.instance.getHotKeyReset();
+
+            if(vkCode == 32)
+            {
+                vkCodetoString = "Space";
+            }
+            else
+            {
+                vkCodetoChar = (char)vkCode;
+                vkCodetoString = vkCodetoChar.ToString();
+            }
+
+
+            if(vkCodetoString == HotKeyHide) // 프로그램 숨기기,보이기
+            {
+                SetDrawingStatus();
+            }
+            else if(vkCodetoString == HotKeyDrawing) // 그리기 모드 On Off
+            {
+                HidePicture();
+                return true;
+            }
+            else if(vkCodetoString == HotKeyReset) // 화면 초기화
+            {
+                viewForm.Refresh();
+            }
+
+            return false;
+
+        }
 
     }
 }

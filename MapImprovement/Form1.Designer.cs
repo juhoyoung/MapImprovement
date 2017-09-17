@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CanvasForm));
             this.contextMenu1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.색상ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.빨강ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,19 +48,30 @@
             this.ConnectServer_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DisConnectServer_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Exit_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.StopDrawing_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.HidePicture_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.notify_contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ShowPicture_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.StartDrawing_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.HotKey_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenu1.SuspendLayout();
+            this.notify_contextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenu1
             // 
             this.contextMenu1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.HidePicture_MenuItem,
             this.색상ToolStripMenuItem,
             this.펜굵기ToolStripMenuItem,
+            this.StopDrawing_MenuItem,
             this.방만들기ToolStripMenuItem,
             this.방참가ToolStripMenuItem,
+            this.HotKey_MenuItem,
             this.Exit_MenuItem});
             this.contextMenu1.Name = "contextMenu1";
-            this.contextMenu1.Size = new System.Drawing.Size(153, 136);
+            this.contextMenu1.Size = new System.Drawing.Size(153, 202);
             this.contextMenu1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenu1_ItemClicked);
             // 
             // 색상ToolStripMenuItem
@@ -146,14 +158,14 @@
             // CreateServer_MenuItem
             // 
             this.CreateServer_MenuItem.Name = "CreateServer_MenuItem";
-            this.CreateServer_MenuItem.Size = new System.Drawing.Size(152, 22);
+            this.CreateServer_MenuItem.Size = new System.Drawing.Size(126, 22);
             this.CreateServer_MenuItem.Text = "방 만들기";
             this.CreateServer_MenuItem.Click += new System.EventHandler(this.CreateServer_MenuItem_Click);
             // 
             // CloseServer_MenuItem
             // 
             this.CloseServer_MenuItem.Name = "CloseServer_MenuItem";
-            this.CloseServer_MenuItem.Size = new System.Drawing.Size(152, 22);
+            this.CloseServer_MenuItem.Size = new System.Drawing.Size(126, 22);
             this.CloseServer_MenuItem.Text = "방 닫기";
             this.CloseServer_MenuItem.Click += new System.EventHandler(this.CloseServer_MenuItem_Click);
             // 
@@ -169,7 +181,7 @@
             // ConnectServer_MenuItem
             // 
             this.ConnectServer_MenuItem.Name = "ConnectServer_MenuItem";
-            this.ConnectServer_MenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ConnectServer_MenuItem.Size = new System.Drawing.Size(126, 22);
             this.ConnectServer_MenuItem.Text = "참가 하기";
             this.ConnectServer_MenuItem.Click += new System.EventHandler(this.ConnectServer_MenuItem_Click);
             // 
@@ -177,7 +189,7 @@
             // 
             this.DisConnectServer_MenuItem.Enabled = false;
             this.DisConnectServer_MenuItem.Name = "DisConnectServer_MenuItem";
-            this.DisConnectServer_MenuItem.Size = new System.Drawing.Size(152, 22);
+            this.DisConnectServer_MenuItem.Size = new System.Drawing.Size(126, 22);
             this.DisConnectServer_MenuItem.Text = "연결 끊기";
             this.DisConnectServer_MenuItem.Click += new System.EventHandler(this.DisConnectServer_MenuItem_Click);
             // 
@@ -188,12 +200,61 @@
             this.Exit_MenuItem.Text = "종료";
             this.Exit_MenuItem.Click += new System.EventHandler(this.ExitMenuItem_Click);
             // 
+            // StopDrawing_MenuItem
+            // 
+            this.StopDrawing_MenuItem.Name = "StopDrawing_MenuItem";
+            this.StopDrawing_MenuItem.Size = new System.Drawing.Size(152, 22);
+            this.StopDrawing_MenuItem.Text = "그리기 중지";
+            this.StopDrawing_MenuItem.Click += new System.EventHandler(this.StopDrawing_MenuItem_Click);
+            // 
+            // HidePicture_MenuItem
+            // 
+            this.HidePicture_MenuItem.Name = "HidePicture_MenuItem";
+            this.HidePicture_MenuItem.Size = new System.Drawing.Size(152, 22);
+            this.HidePicture_MenuItem.Text = "숨기기";
+            this.HidePicture_MenuItem.Click += new System.EventHandler(this.HidePicture_MenuItem_Click);
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.ContextMenuStrip = this.notify_contextMenu;
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "Option";
+            // 
+            // notify_contextMenu
+            // 
+            this.notify_contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ShowPicture_MenuItem,
+            this.StartDrawing_MenuItem});
+            this.notify_contextMenu.Name = "notify_contextMenu";
+            this.notify_contextMenu.Size = new System.Drawing.Size(139, 48);
+            // 
+            // ShowPicture_MenuItem
+            // 
+            this.ShowPicture_MenuItem.Name = "ShowPicture_MenuItem";
+            this.ShowPicture_MenuItem.Size = new System.Drawing.Size(138, 22);
+            this.ShowPicture_MenuItem.Text = "보이기";
+            this.ShowPicture_MenuItem.Click += new System.EventHandler(this.ShowPicture_MenuItem_Click);
+            // 
+            // StartDrawing_MenuItem
+            // 
+            this.StartDrawing_MenuItem.Name = "StartDrawing_MenuItem";
+            this.StartDrawing_MenuItem.Size = new System.Drawing.Size(138, 22);
+            this.StartDrawing_MenuItem.Text = "그리기 시작";
+            this.StartDrawing_MenuItem.Click += new System.EventHandler(this.StartDrawing_MenuItem_Click);
+            // 
+            // HotKey_MenuItem
+            // 
+            this.HotKey_MenuItem.Name = "HotKey_MenuItem";
+            this.HotKey_MenuItem.Size = new System.Drawing.Size(152, 22);
+            this.HotKey_MenuItem.Text = "단축키";
+            this.HotKey_MenuItem.Click += new System.EventHandler(this.HotKeyMenuItem_Click);
+            // 
             // CanvasForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(400, 400);
+            this.ClientSize = new System.Drawing.Size(384, 361);
             this.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.Name = "CanvasForm";
             this.Opacity = 0.4D;
@@ -204,6 +265,7 @@
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CanvasForm_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CanvasForm_MouseUp);
             this.contextMenu1.ResumeLayout(false);
+            this.notify_contextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -228,6 +290,13 @@
         private System.Windows.Forms.ToolStripMenuItem DisConnectServer_MenuItem;
         private System.Windows.Forms.ToolStripMenuItem CreateServer_MenuItem;
         private System.Windows.Forms.ToolStripMenuItem CloseServer_MenuItem;
+        private System.Windows.Forms.ToolStripMenuItem StopDrawing_MenuItem;
+        private System.Windows.Forms.ToolStripMenuItem HidePicture_MenuItem;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.ContextMenuStrip notify_contextMenu;
+        private System.Windows.Forms.ToolStripMenuItem ShowPicture_MenuItem;
+        private System.Windows.Forms.ToolStripMenuItem StartDrawing_MenuItem;
+        private System.Windows.Forms.ToolStripMenuItem HotKey_MenuItem;
     }
 }
 
