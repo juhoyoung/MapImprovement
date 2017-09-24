@@ -49,7 +49,7 @@ namespace MapImprovement
             Port = OptionController.oController.getConnectPort();
             try
             {
-                //clientSocket.Connect("110.14.208.196", 10000);
+                
                 clientSocket.Connect(IPAddress, Port);
                 
                 stream = clientSocket.GetStream();
